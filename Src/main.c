@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 
 /* USER CODE END Includes */
 
@@ -40,11 +41,13 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+/* USER CODE BEGIN PV */
+
 TIM_HandleTypeDef htim7;
 
 UART_HandleTypeDef huart2;
 
-/* USER CODE BEGIN PV */
+volatile uint32_t counter;
 
 /* USER CODE END PV */
 
@@ -59,6 +62,18 @@ static void MX_TIM7_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int __io_putchar(int ch) {
+    while (!(USART2->ISR & USART_ISR_TXE)) {}
+    USART2->TDR = (ch & 0xFF);
+    return ch;
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+  HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+  printf("counter: %ld\n", counter);
+  counter = 0;
+}
+
 
 /* USER CODE END 0 */
 
@@ -95,12 +110,14 @@ int main(void)
   MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim7);
+  printf("hello, world\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    counter++;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -274,13 +291,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  if (htim->Instance == TIM7) {
-    HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-  }
-}
-
 
 /* USER CODE END 4 */
 
