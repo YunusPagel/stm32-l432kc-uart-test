@@ -69,9 +69,10 @@ int __io_putchar(int ch) {
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+  static uint32_t last_counter;
   HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-  printf("counter: %ld\n", counter);
-  counter = 0;
+  printf("counter: %ld\n", counter - last_counter);
+  last_counter = counter;
 }
 
 
