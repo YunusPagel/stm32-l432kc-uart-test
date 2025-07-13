@@ -21,6 +21,10 @@ endif()
 # Set the project name
 set(CMAKE_PROJECT_NAME uart_test)
 
+# Set Debug flags: No optimization, full debug info
+set(CMAKE_C_FLAGS_DEBUG "-O0 -g3")
+set(CMAKE_ASM_FLAGS_DEBUG "-g3")
+
 # Include toolchain file
 include("cmake/gcc-arm-none-eabi.cmake")
 
