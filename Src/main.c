@@ -73,7 +73,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
   printf("counter: %ld\n", counter - last_counter);
   last_counter = counter;
-  HAL_UART_Transmit(&huart2, (uint8_t*)"Moege dein WLAN immer stark sein. Frohes neues Jahr!\n", 54, HAL_MAX_DELAY);
+  //HAL_UART_Transmit(&huart2, (uint8_t*)"Moege dein WLAN immer stark sein. Frohes neues Jahr!\n", 54, HAL_MAX_DELAY);
 }
 
 
