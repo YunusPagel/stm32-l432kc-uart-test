@@ -81,7 +81,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   last_counter = counter;
   //HAL_UART_Transmit(&huart2, (uint8_t*)"Moege dein WLAN immer stark sein. Frohes neues Jahr!\n", 54, HAL_MAX_DELAY); //via Polling
   //HAL_UART_Transmit_IT(&huart2, (uint8_t*)"Moege dein WLAN immer stark sein. Frohes neues Jahr!\n", 54); //via Interrupt
-  HAL_UART_Transmit_DMA(&huart2, (uint8_t*)"Moege dein WLAN immer stark sein. Frohes neues Jahr!\n", 54); //via DMA
+  //HAL_UART_Transmit_DMA(&huart2, (uint8_t*)"Moege dein WLAN immer stark sein. Frohes neues Jahr!\n", 54); //via DMA
 }
 
 
